@@ -1,0 +1,358 @@
+.container {
+    background-color: #0a0a0a;
+    color: #ffffff;
+    min-height: 100vh;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+}
+
+.header {
+    display: flex;
+    z-index: 101;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.analyticsText {
+    color: #39FF14;
+}
+
+.logoIcon {
+    width: 24px;
+    height: 24px;
+    background: #39FF14;
+    border-radius: 4px;
+}
+
+.headerRight {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.userInfo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-left: 1px solid #333;
+    padding-left: 20px;
+}
+
+.userText {
+    text-align: right;
+}
+
+.userName {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.userRole {
+    font-size: 11px;
+    color: #888;
+    margin: 0;
+}
+
+.avatar {
+    width: 35px;
+    height: 35px;
+    background: #444;
+    border-radius: 50%;
+}
+
+/* Map Section */
+.mapSection {
+    background: #111;
+    height: 70vh;
+    border-radius: 12px;
+    position: relative;
+    background-image: radial-gradient(#222 1px, transparent 1px);
+    background-size: 30px 30px;
+    border: 1px solid #222;
+}
+
+.mapBadge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 10px;
+    border: 1px solid #333;
+}
+
+.dot {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #39FF14;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #39FF14;
+}
+
+.dot1 {
+    top: 30%;
+    left: 40%;
+}
+
+.dot2 {
+    top: 50%;
+    left: 60%;
+}
+
+.dot3 {
+    top: 70%;
+    left: 80%;
+}
+
+.fullscreenIcon {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    color: #666;
+}
+
+/* Filters */
+.filters {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
+    font-size: 12px;
+    color: #888;
+}
+
+.chip {
+    background: #1a2f1a;
+    color: #39FF14;
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: 1px solid #39FF14;
+}
+
+.selectChip {
+    background: #1a1a1a;
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: 1px solid #333;
+}
+
+.resetAll {
+    color: #39FF14;
+    cursor: pointer;
+}
+
+/* Grid Layout */
+.mainGrid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 20px;
+}
+
+.sectionHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.sectionHeader h2 {
+    font-size: 16px;
+    margin: 0;
+}
+
+.viewAll {
+    background: #1a1a1a;
+    color: #39FF14;
+    border: 1px solid #333;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 10px;
+}
+
+/* Cards */
+.card,
+.taskCard {
+    background: #161616;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 12px;
+    border: 1px solid #222;
+}
+
+.card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.cardIcon {
+    background: #111;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.cardContent h3 {
+    font-size: 14px;
+    margin: 0 0 5px 0;
+}
+
+.cardContent p {
+    font-size: 11px;
+    color: #888;
+    margin: 0 0 8px 0;
+}
+
+.newBadge {
+    background: #39FF14;
+    color: black;
+    font-size: 9px;
+    padding: 1px 5px;
+    border-radius: 3px;
+    margin-left: 5px;
+}
+
+.proBadge {
+    font-size: 9px;
+    border: 1px solid #333;
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+/* Task Cards */
+.taskTop {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.unitInfo {
+    display: flex;
+    gap: 12px;
+}
+
+.unitInfo h4 {
+    font-size: 14px;
+    margin: 0;
+}
+
+.unitInfo p {
+    font-size: 11px;
+    color: #888;
+    margin: 0;
+}
+
+.idleStatus {
+    color: #39FF14;
+    font-size: 10px;
+    background: #1a2f1a;
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+.routeStatus {
+    color: #FFA500;
+    font-size: 10px;
+    background: #2f251a;
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+.taskActionRow {
+    display: flex;
+    align-items: flex-end;
+    gap: 15px;
+}
+
+.metricBox {
+    flex: 1;
+}
+
+.metricLabels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: #888;
+    margin-bottom: 5px;
+}
+
+.progressBar {
+    height: 6px;
+    background: #222;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progressFill {
+    height: 100%;
+    border-radius: 3px;
+}
+
+.assignBtn {
+    background: #39FF14;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.routeBtn {
+    background: #222;
+    color: white;
+    border: 1px solid #333;
+    padding: 10px 20px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.floatingButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: white;
+    color: black;
+    padding: 12px;
+    border-radius: 50%;
+}
+
+.logoutBtn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: transparent;
+    color: #ff4b4b;
+    border: 1px solid transparent;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-left: 18vw;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    width: fit-content;
+}
+
+.logoutBtn:hover {
+    background: rgba(255, 75, 75, 0.1);
+    border-color: rgba(255, 75, 75, 0.3);
+    transform: translateX(5px);
+}
+
+.logoutBtn span {
+    font-size: 14px;
+}
