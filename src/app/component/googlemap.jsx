@@ -109,6 +109,9 @@ export default function GoogleHybridMap({ center }) {
         });
     };
 
+    if (typeof window === 'undefined') {
+        return null; // Server side par kuch mat dikhao
+    }
 
     return (
         <div style={{ height: "70vh", width: "100%", borderRadius: "15px", overflow: "hidden" }}>

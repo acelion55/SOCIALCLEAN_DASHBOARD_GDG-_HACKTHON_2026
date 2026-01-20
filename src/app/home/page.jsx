@@ -5,8 +5,14 @@ import { useRouter } from "next/navigation";
 import Navbar from "../component/navbar"
 import React from 'react';
 import Filter from "../component/filterhome"
-import Googlemap from "../component/googlemap";
 import dynamic from 'next/dynamic';
+const Googlemap = dynamic(
+  () => import("../component/googlemap"),
+  {
+    ssr: false,
+    loading: () => <div style={{ height: "70vh", background: "#1a1a1a" }}>Loading Map...</div>
+  }
+);
 import styles from '../../style/home.module.css';
 import {
   Bell, Maximize,
