@@ -4,6 +4,7 @@ import { auth } from "../../../backend/firebase";
 import { useRouter } from "next/navigation";
 import Navbar from "../component/navbar"
 import React from 'react';
+import ReportList from "../reportlist/reportlist"
 import Filter from "../component/filterhome"
 import dynamic from 'next/dynamic';
 const Googlemap = dynamic(
@@ -22,6 +23,11 @@ import {
 const page = () => {
   const [mapCenter, setMapCenter] = useState([26.86, 75.78]);
   const [loading, setLoading] = useState(true);
+  const [selectedFilter, setSelectedFilter] = useState("");
+
+
+
+
   const router = useRouter();
 
   const handleLocationSelect = (coords) => {
@@ -41,6 +47,8 @@ const page = () => {
   }, []);
 
 
+
+
   return (
 
     <div className={styles.container}>
@@ -54,8 +62,11 @@ const page = () => {
 
         <Maximize className={styles.fullscreenIcon} size={20} />
       </section>
-      <Filter />
-
+      <Filter onFilterChange={(val) => setSelectedFilter(val)} />
+      <div className="reports-section">
+        <h3 style={{ color: 'white', padding: '20px 20px 0 20px' }}>Live Incident Reports</h3>
+        <ReportList selectedFilter={selectedFilter} />
+      </div>
     </div>
 
   );

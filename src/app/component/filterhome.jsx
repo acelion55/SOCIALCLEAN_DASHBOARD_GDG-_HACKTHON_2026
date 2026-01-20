@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AsyncSelect from 'react-select/async'; // OpenStreetMap se data fetch karne ke liye
 import Select from 'react-select';
 import styles from '../../style/home.module.css';
@@ -8,6 +8,11 @@ const FilterHome = ({ onFilterChange }) => {
   const [city, setCity] = useState();
   const [area, setArea] = useState();
   const [state, setState] = useState();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // 1. Nominatim API se City/Area search karne ka function
   const loadLocationOptions = async (inputValue) => {
@@ -19,30 +24,58 @@ const FilterHome = ({ onFilterChange }) => {
       );
       const data = await response.json();
 
-      return data.map((item) => ({
-        label: item.display_name.split(',')[0] + ", " + (item.address?.city || item.address?.state || ""),
-        value: item.display_name,
-        lat: item.lat,
-        lon: item.lon
-      }));
+      return data.map((item) => {
+        const mainName = item.display_name.split(',')[0].trim();
+        const city = item.address?.city || item.address?.town || item.address?.village || "";
+        const state = item.address?.state || "";
+
+        let subName = city || state || "";
+
+        // Avoid duplicating name if it matches
+        if (subName && mainName.toLowerCase() === subName.toLowerCase()) {
+          subName = "";
+        }
+
+        // Construct label
+        let label = mainName;
+        if (subName && !label.includes(subName)) {
+          label += `, ${subName}`;
+        }
+
+        // Remove trailing comma if any
+        label = label.replace(/,\s*$/, "");
+
+        return {
+          label: label,
+          value: item.display_name,
+          lat: item.lat,
+          lon: item.lon
+        };
+      });
     } catch (error) {
       console.error("Error fetching locations:", error);
       return [];
     }
   };
 
-
-
   const handleFilterUpdate = (type, selected) => {
-    if (type === 'city') setCity(selected);
-    if (type === 'area') setArea(selected);
-    if (type === 'state') setState(selected);
+    // Helper to clean trailing commas from label
+    const clean = (opt) => {
+      if (!opt || !opt.label) return opt;
+      return { ...opt, label: opt.label.replace(/,\s*$/, "") };
+    };
+
+    const cleanSelected = clean(selected);
+
+    if (type === 'city') setCity(cleanSelected);
+    if (type === 'area') setArea(cleanSelected);
+    if (type === 'state') setState(cleanSelected);
 
     if (onFilterChange) {
       onFilterChange({
-        city: type === 'city' ? selected?.label : city.label,
-        area: type === 'area' ? selected?.label : area.label,
-        state: type === 'state' ? selected?.label : state.label
+        city: type === 'city' ? cleanSelected?.label : city?.label,
+        area: type === 'area' ? cleanSelected?.label : area?.label,
+        state: type === 'state' ? cleanSelected?.label : state?.label
       });
     }
   };
@@ -62,6 +95,8 @@ const FilterHome = ({ onFilterChange }) => {
     menu: (base) => ({ ...base, background: '#1a1a1a', zIndex: 9999 }),
 
   };
+
+  if (!mounted) return null;
 
   return (
     <div className={styles.filters}>

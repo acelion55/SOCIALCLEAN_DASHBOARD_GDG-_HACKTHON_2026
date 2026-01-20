@@ -1,10 +1,10 @@
 "use client";
-import { Margarine } from 'next/font/google';
 import React from 'react';
-import AsyncSelect from 'react-select/async';
+import dynamic from 'next/dynamic';
 
+const AsyncSelect = dynamic(() => import('react-select/async'), { ssr: false });
 
-const search = ({ onSelect }) => {
+const Search = ({ onSelect }) => {
 
     const loadOptions = async (inputValue) => {
         if (!inputValue) return [];
@@ -23,7 +23,6 @@ const search = ({ onSelect }) => {
     const customStyles = {
         control: (base) => ({
             ...base,
-
             background: '#1a1a1a',
             borderColor: '#333',
             borderRadius: '8px',
@@ -41,7 +40,6 @@ const search = ({ onSelect }) => {
     };
 
     return (
-
         <AsyncSelect
             cacheOptions
             loadOptions={loadOptions}
@@ -50,8 +48,7 @@ const search = ({ onSelect }) => {
             onChange={(opt) => onSelect(opt.value)}
             styles={customStyles}
         />
-
     );
 };
 
-export default search;
+export default Search;
