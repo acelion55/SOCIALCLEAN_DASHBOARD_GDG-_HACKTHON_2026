@@ -356,3 +356,9 @@
 .logoutBtn span {
     font-size: 14px;
 }
+
+::-webkit-scrollbar-track {
+    background: #121417;
+    /* Aapke card container ka dark color */
+    border-radius: 10px;
+}

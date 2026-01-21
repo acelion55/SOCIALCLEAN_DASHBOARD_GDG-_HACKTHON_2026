@@ -63,11 +63,13 @@ const page = () => {
         <Maximize className={styles.fullscreenIcon} size={20} />
       </section>
       <Filter onFilterChange={(val) => setSelectedFilter(val)} />
-      <div className="reports-section">
+      <div style={{ display: "flex", flexDirection: "column" }}>
         <h3 style={{ color: 'white', padding: '20px 20px 0 20px' }}>Live Incident Reports</h3>
-        <ReportList selectedFilter={selectedFilter} />
+        <div style={{ marginLeft: "0vw", width: "45vw", height: "80vh", overflowY: "auto", position: "relative", scrollbarWidth: "thin" }}>
+          <ReportList selectedFilter={selectedFilter} />
+        </div>
       </div>
-    </div>
+    </div >
 
   );
 };

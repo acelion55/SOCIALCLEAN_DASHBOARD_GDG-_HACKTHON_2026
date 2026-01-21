@@ -9,13 +9,14 @@ const ReportCard = ({ report }) => {
 
     const handleStatusUpdate = async (e) => {
         const isChecked = e.target.checked;
+        const newStatus = isChecked ? "Is Resolved ?" : "Pending";
         if (isChecked && report.id) {
             try {
                 const reportRef = doc(userDb, "reports", report.id);
                 await updateDoc(reportRef, {
-                    status: "In Review"
+                    status: "Is Resolved ?"
                 });
-                alert("Status updated to In Review!");
+                alert("Status updated to Is Resolved ?");
             } catch (error) {
                 console.error("Error updating status:", error);
                 alert("Failed to update status.");
@@ -23,9 +24,18 @@ const ReportCard = ({ report }) => {
         }
     };
 
+
     const formattedDate = report.createdAt?.toDate
         ? report.createdAt.toDate().toLocaleString()
         : "Recent";
+    let badgeBg
+    if (report.status === "pending") {
+        badgeBg = "rgb(255, 43, 43)"
+    } else if (report.status === "Is Resolved ?") {
+        badgeBg = "#FF7A00"
+    } else if (report.status === "Resolved") {
+        badgeBg = "green"
+    }
 
     return (
         <div style={cardContainer}>
@@ -33,8 +43,7 @@ const ReportCard = ({ report }) => {
             <div style={imageSection}>
                 <div style={{
                     ...statusBadge,
-                    background: report.status === "In Review" ? "#39FF14" : "#FF7A00",
-                    color: report.status === "In Review" ? "black" : "white"
+                    backgroundColor: badgeBg,
                 }}>
                     {report.status?.toUpperCase() || "PENDING"}
                 </div>
@@ -43,7 +52,7 @@ const ReportCard = ({ report }) => {
                     <img
                         src={report.imageUrl}
                         alt="Garbage"
-                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        style={{ objectFit: 'cover' }}
                     />
                 ) : (
                     <div style={{ color: '#666', fontSize: '12px' }}>No Image Available</div>
@@ -75,13 +84,13 @@ const ReportCard = ({ report }) => {
                             <input
                                 type="checkbox"
                                 onChange={handleStatusUpdate}
-                                checked={report.status === "In Review"}
-                                disabled={report.status === "In Review"}
+                                checked={report.status === "Is Resolved"}
+                                disabled={report.status === "Resolved"}
                             />
                             <span className="slider round"></span>
                         </label>
                         <span style={toggleLabel}>
-                            {report.status === "In Review" ? "Cleaning in Progress" : "Garbage Cleaned?"}
+                            {report.status === "Is Resolved ?" ? "Cleaning in Progress" : "Garbage Cleaned?"}
                         </span>
                     </div>
                     <MoreVertical size={20} color="#888" style={{ cursor: 'pointer' }} />
@@ -171,10 +180,10 @@ const ReportList = ({ selectedFilter }) => {
     );
 };
 
-const cardContainer = { display: 'flex', background: '#121417', borderRadius: '16px', overflow: 'hidden', border: '1px solid #2a2d32', width: '100%', maxWidth: '650px', color: 'white', marginBottom: '15px' };
-const imageSection = { width: '35%', background: '#222', position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '200px' };
+const cardContainer = { display: 'flex', background: '#121417', borderRadius: '16px', height: "40vh", overflow: 'hidden', border: '1px solid #2a2d32', Width: '50vw', color: 'white', marginBottom: '15px', marginTop: "3vh" };
+const imageSection = { width: '20vh', background: '#222', position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center', };
 const statusBadge = { position: 'absolute', top: '15px', left: '15px', fontSize: '10px', fontWeight: 'bold', padding: '4px 10px', borderRadius: '4px', zIndex: 2 };
-const detailsSection = { width: '65%', padding: '20px', display: 'flex', flexDirection: 'column' };
+const detailsSection = { width: '30vw', padding: '20px', display: 'flex', flexDirection: 'column' };
 const headerRow = { display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '5px' };
 const title = { margin: 0, fontSize: '18px', fontWeight: 'bold' };
 const timeStamp = { color: '#666', fontSize: '12px' };
